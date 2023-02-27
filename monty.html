@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" type="text/css" href="monty_style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>the monty hall problem</title>
+    </header>
+    <body>  
+        <div class="cont">
+            <div class="door_container">
+                <div class="door no1">
+                    1
+                </div>
+                <div class="door no2">
+                    2
+                </div>
+                <div class="door no3">
+                    3
+                </div>
+            </div>
+
+        <button id="button_A">Let's Begin</button>
+        <h3 id="heading_A"></h3>
+        </div>
+    </body>
+    <script>
+        const buttonA = document.querySelector('#button_A');
+        const headingA = document.querySelector('#heading_A');
+        
+        buttonA.addEventListener("click", function(){
+        document.querySelector(".door_container").style.display = "flex";
+        buttonA.style.display = "none";
+        });
+        
+    </script>
+    </html>
