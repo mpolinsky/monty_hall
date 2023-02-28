@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <header>
+    <head>
         <meta charset="UTF-8" />
         <link rel="stylesheet" type="text/css" href="monty_style.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>the monty hall problem</title>
-    </header>
+    </head>
     <body>  
         <div class="cont">
-            <div class="door_container">
-                <div class="door" id="no_1">
+            <p id="choice"></p>
+            <p id="monty"></p>
+            <div class="door_container" id="doors">
+                <div class="door" id="no_1" value="1">
                     1
                 </div>
-                <div class="door" id="no_2">
+                <div class="door" id="no_2" value="2">
                     2
                 </div>
                 
-                <div class="door" id="no_3">
+                <div class="door" id="no_3" value="3">
                     3
                 </div>
             </div>
+
+            <div class="results" id="results">
+               
+            </div>
+
             <div class="btn-pnl">
-            <button class="switch" id="sw">Switch?</button>
-            <button class="finish" id="fin">Finish</button>
+            <button class="switch" id="sw">Switch</button>
+            <button class="finish" id="fin">Stay</button>
             </div>
         <button id="button_A">Let's Begin</button>
         <h3 id="heading_A"></h3>
+        <button class="restart" id="rst">restart</button>
         </div>
+        
     </body>
 
 
@@ -38,10 +47,12 @@
         const door_no2 = document.querySelector('#no_2');
         const door_no3 = document.querySelector('#no_3');
         const sw_btn = document.querySelector('#sw');
-        const fin_btn = document.querySelector("#fin");
+        const sty_btn = document.querySelector("#fin");
+        const restart_btn = document.querySelector("#rst")
         var winner = (Math.floor(Math.random()*10)%3)+1;
-        var choice = 9;
+        
 
+        headingA.innerHTML = winner;
         buttonA.addEventListener("click", function(){
         document.querySelector(".door_container").style.display = "flex";
         buttonA.style.display = "none";
@@ -50,34 +61,65 @@
         door_no1.addEventListener("click", eliminate_d1);
         door_no2.addEventListener("click", eliminate_d2);
         door_no3.addEventListener("click", eliminate_d3);
-
         
         sw_btn.addEventListener("click", switch_door, {once:true});
-        fin_btn.addEventListener("click", reveal);
+        sty_btn.addEventListener("click", reveal);
+
+        restart_btn.addEventListener("click", restart);
+
+        function restart(){
+            window.location.reload();
+        }
+
+        function reveal(winner){
+            let res = document.getElementById("results");
+            res.style.display = "flex";
+            let doors = document.getElementById('doors');
+            doors.style.display = 'none';
+            sw_btn.style.display = "none";
+            sty_btn.style.display = "none";
+
+            if(Number(document.getElementById('heading_A').innerHTML) == Number(document.getElementById("choice").innerHTML)){
+                res.innerHTML = "WINNER!!!";
+            }
+            else{
+                res.innerHTML = "LOSER!";
+            }
+            document.getElementById('rst').style.display = "flex";
+        }
 
         function switch_door(){
             // Switch your choice
+            let temp = document.getElementById("choice").innerHTML;
+            document.getElementById("choice").innerHTML = document.getElementById("monty").innerHTML;
+            document.getElementById("monty").innerHTML = temp;
+            document.getElementById("fin").innerHTML = "Reveal!";
+            document.getElementById("sw").style.display = "none";
         }
 
         function eliminate_d1(){
-            choice = 1;
+            document.getElementById("choice").innerHTML = door_no1.innerHTML
             // flip a coin to select a door to eliminate then return that
             if (winner == 1){
                 if(Math.floor(Math.random()*10)%2==0){
                     door_no2.style.display="none";
+                    document.getElementById("monty").innerHTML = door_no3.innerHTML
                 }
                 else{
                     door_no3.style.display="none";
+                    document.getElementById("monty").innerHTML = door_no2.innerHTML
                 }
             }
             else if(winner == 2){
                 door_no3.style.display="none";
+                document.getElementById("monty").innerHTML = door_no2.innerHTML
             }
             else{
                 door_no2.style.display="none";
+                document.getElementById("monty").innerHTML = door_no3.innerHTML
             }
             sw_btn.style.display = "flex";
-            fin_btn.style.display = "flex";
+            sty_btn.style.display = "flex";
 
             door_no1.removeEventListener("click", eliminate_d1);
             door_no2.removeEventListener("click", eliminate_d2);
@@ -85,25 +127,29 @@
         }
 
         function eliminate_d2(){
-            choice = 2;
+            document.getElementById("choice").innerHTML = door_no2.innerHTML
             // flip a coin to select a door to eliminate then return that
             if (winner == 2){
                 if(Math.floor(Math.random()*10)%2==0){
                     door_no1.style.display="none";
+                    document.getElementById("monty").innerHTML = door_no3.innerHTML
                 }
                 else{
                     door_no3.style.display="none";
+                    document.getElementById("monty").innerHTML = door_no1.innerHTML
                 }
             }
             else if(winner == 1){
                 door_no3.style.display="none";
+                document.getElementById("monty").innerHTML = door_no1.innerHTML
             }
             else{
                 door_no1.style.display="none";
+                document.getElementById("monty").innerHTML = door_no3.innerHTML
             }
 
             sw_btn.style.display = "flex";
-            fin_btn.style.display = "flex";
+            sty_btn.style.display = "flex";
 
 
             door_no1.removeEventListener("click", eliminate_d1);
@@ -112,25 +158,29 @@
         }
 
         function eliminate_d3(){
-            choice = 3;
+            document.getElementById("choice").innerHTML = door_no3.innerHTML
             // flip a coin to select a door to eliminate then return that
             if (winner == 3){
                 if(Math.floor(Math.random()*10)%2==0){
                     door_no2.style.display="none";
+                    document.getElementById("monty").innerHTML = door_no1.innerHTML
                 }
                 else{
                     door_no1.style.display="none";
+                    document.getElementById("monty").innerHTML = door_no2.innerHTML
                 }
             }
             else if(winner == 2){
                 door_no1.style.display="none";
+                document.getElementById("monty").innerHTML = door_no2.innerHTML
             }
             else{
                 door_no2.style.display="none";
+                document.getElementById("monty").innerHTML = door_no1.innerHTML
             }
 
             sw_btn.style.display = "flex";
-            fin_btn.style.display = "flex";
+            sty_btn.style.display = "flex";
 
 
             door_no1.removeEventListener("click", eliminate_d1);
