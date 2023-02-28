@@ -138,12 +138,4 @@ function eliminate_d2(){ eliminate(door_no2, door_no1, door_no3);}
 function eliminate_d3(){ eliminate(door_no3, door_no2, door_no1);}
 
 
-function elim_door(d1, d2){
-    // flip a coin to select a door to eliminate then return that
-    if (Math.floor(Math.random()*10)%2==0){
-        d2.style.display="none";
-    }
-    else{
-        d1.style.display="none";
-    }
-}
+
