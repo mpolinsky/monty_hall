@@ -9,29 +9,144 @@
     <body>  
         <div class="cont">
             <div class="door_container">
-                <div class="door no1">
+                <div class="door" id="no_1">
                     1
                 </div>
-                <div class="door no2">
+                <div class="door" id="no_2">
                     2
                 </div>
-                <div class="door no3">
+                
+                <div class="door" id="no_3">
                     3
                 </div>
             </div>
-
+            <div class="btn-pnl">
+            <button class="switch" id="sw">Switch?</button>
+            <button class="finish" id="fin">Finish</button>
+            </div>
         <button id="button_A">Let's Begin</button>
         <h3 id="heading_A"></h3>
         </div>
     </body>
+
+
     <script>
+
         const buttonA = document.querySelector('#button_A');
         const headingA = document.querySelector('#heading_A');
-        
+        const door_no1 = document.querySelector('#no_1');
+        const door_no2 = document.querySelector('#no_2');
+        const door_no3 = document.querySelector('#no_3');
+        const sw_btn = document.querySelector('#sw');
+        const fin_btn = document.querySelector("#fin");
+        var winner = (Math.floor(Math.random()*10)%3)+1;
+        var choice = 9;
+
         buttonA.addEventListener("click", function(){
         document.querySelector(".door_container").style.display = "flex";
         buttonA.style.display = "none";
-        });
+        }, {once:true});
         
-    </script>
+        door_no1.addEventListener("click", eliminate_d1);
+        door_no2.addEventListener("click", eliminate_d2);
+        door_no3.addEventListener("click", eliminate_d3);
+
+        
+        sw_btn.addEventListener("click", switch_door, {once:true});
+        fin_btn.addEventListener("click", reveal);
+
+        function switch_door(){
+            // Switch your choice
+        }
+
+        function eliminate_d1(){
+            choice = 1;
+            // flip a coin to select a door to eliminate then return that
+            if (winner == 1){
+                if(Math.floor(Math.random()*10)%2==0){
+                    door_no2.style.display="none";
+                }
+                else{
+                    door_no3.style.display="none";
+                }
+            }
+            else if(winner == 2){
+                door_no3.style.display="none";
+            }
+            else{
+                door_no2.style.display="none";
+            }
+            sw_btn.style.display = "flex";
+            fin_btn.style.display = "flex";
+
+            door_no1.removeEventListener("click", eliminate_d1);
+            door_no2.removeEventListener("click", eliminate_d2);
+            door_no3.removeEventListener("click", eliminate_d3);
+        }
+
+        function eliminate_d2(){
+            choice = 2;
+            // flip a coin to select a door to eliminate then return that
+            if (winner == 2){
+                if(Math.floor(Math.random()*10)%2==0){
+                    door_no1.style.display="none";
+                }
+                else{
+                    door_no3.style.display="none";
+                }
+            }
+            else if(winner == 1){
+                door_no3.style.display="none";
+            }
+            else{
+                door_no1.style.display="none";
+            }
+
+            sw_btn.style.display = "flex";
+            fin_btn.style.display = "flex";
+
+
+            door_no1.removeEventListener("click", eliminate_d1);
+            door_no2.removeEventListener("click", eliminate_d2);
+            door_no3.removeEventListener("click", eliminate_d3);
+        }
+
+        function eliminate_d3(){
+            choice = 3;
+            // flip a coin to select a door to eliminate then return that
+            if (winner == 3){
+                if(Math.floor(Math.random()*10)%2==0){
+                    door_no2.style.display="none";
+                }
+                else{
+                    door_no1.style.display="none";
+                }
+            }
+            else if(winner == 2){
+                door_no1.style.display="none";
+            }
+            else{
+                door_no2.style.display="none";
+            }
+
+            sw_btn.style.display = "flex";
+            fin_btn.style.display = "flex";
+
+
+            door_no1.removeEventListener("click", eliminate_d1);
+            door_no2.removeEventListener("click", eliminate_d2);
+            door_no3.removeEventListener("click", eliminate_d3);
+        }
+
+        
+        function elim_door(d1, d2){
+            // flip a coin to select a door to eliminate then return that
+            if (Math.floor(Math.random()*10)%2==0){
+                d2.style.display="none";
+            }
+            else{
+                d1.style.display="none";
+            }
+       }
+        </script>
     </html>
