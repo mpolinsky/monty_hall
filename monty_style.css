@@ -147,22 +147,19 @@ button{
 }
 
 .heading_A{
-    display: none;/*flex;
-    color:black;*/
+    display: flex;
+    color:black;
 }
 
-h3{
-    display: none;
-}
 
 #choice{
-    display: none;/*flex;
-    color:black;*/
+    display: flex;
+    color:black;
 }
 
 #monty{
-    display: none;/*flex;
-    color:black;*/
+    display: flex;
+    color:black;
 }
 
 .restart{
