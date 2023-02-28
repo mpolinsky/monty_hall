@@ -1,4 +1,4 @@
-
+// Setup: elements and winner
 const buttonA = document.querySelector('#button_A');
 const headingA = document.querySelector('#heading_A');
 const door_no1 = document.querySelector('#no_1');
@@ -36,7 +36,7 @@ function restart(){
     window.location.reload();
 }
 
-function reveal(winner){
+function reveal(){
     i2.style.display = "none";
     i3.style.display = "none";
     let res = document.getElementById("results");
@@ -56,144 +56,85 @@ function reveal(winner){
 }
 
 function switch_door(){
-
     // Switch your choice
-    let temp = document.getElementById("choice").innerHTML;
-    
-    document.getElementById("choice").innerHTML = document.getElementById("monty").innerHTML;
+    let temp = Number(document.getElementById("choice").innerHTML);
+    document.getElementById("choice").innerHTML = Number(document.getElementById("monty").innerHTML);
     document.getElementById("monty").innerHTML = temp;
-    document.getElementById("fin").innerHTML = "Reveal!";
-    document.getElementById("sw").style.display = "none";
 
-    if(Number(document.getElementById("monty").innerHTML) == 1){
-        document.getElementById("no_1").style.background = '#497aff';
-        if(Number(document.getElementById("choice").innerHTML) == 2){
-            document.getElementById("no_2").style.background = '#fffbce';}
+    // Once switch is selected, eliminate switch button 
+    // and change "stay" to "reveal"
+    sw_btn.style.display = "none";
+    sty_btn.innerHTML = "Reveal!";
+
+    if(mont == 1){
+        door_no1.style.background = '#497aff';
+        if(choice == 2){
+            door_no2.style.background = '#fffbce';}
         else{
-            document.getElementById("no_3").style.background = '#fffbce';
+            door_no3.style.background = '#fffbce';
         }
     }
-    else if(Number(document.getElementById("monty").innerHTML) == 2){
-        document.getElementById("no_2").style.background = '#497aff';
-        if(Number(document.getElementById("choice").innerHTML) == 1){
-            document.getElementById("no_1").style.background = '#fffbce';}
+    else if(mont == 2){
+        door_no2.style.background = '#497aff';
+        if(choice== 1){
+            door_no1.style.background = '#fffbce';}
         else{
-            document.getElementById("no_3").style.background = '#fffbce';
+            door_no3.style.background = '#fffbce';
         }
     }
-    else if(Number(document.getElementById("monty").innerHTML) == 3){
-        document.getElementById("no_3").style.background = '#497aff';
-        if(Number(document.getElementById("choice").innerHTML) == 2){
-            document.getElementById("no_2").style.background = '#fffbce';}
+    else if(mont == 3){
+        door_no3.style.background = '#497aff';
+        if(choice== 2){
+            door_no2.style.background = '#fffbce';}
         else{
-            document.getElementById("no_1").style.background = '#fffbce';
+            door_no1.style.background = '#fffbce';
         }
     }
-    }
+}
 
-
-function eliminate_d1(){
-    door_no1.style.background = '#fffbce';
-    document.getElementById("choice").innerHTML = door_no1.innerHTML
+function eliminate(door, d2, d3){
+    door.style.background = '#fffbce';
+    // Store choice in HTML
+    document.getElementById("choice").innerHTML = door.innerHTML
     i1.style.display = "none";
     i2.style.display = "flex";
     i3.style.display = "flex";
-    // flip a coin to select a door to eliminate then return that
-    if (winner == 1){
+    // if user choice is the winner choose either of Monty's door to eliminate
+    if (winner == Number(door.innerHTML)){
         if(Math.floor(Math.random()*10)%2==0){
-            door_no2.style.display="none";
-            document.getElementById("monty").innerHTML = door_no3.innerHTML
+            d2.style.display="none";
+            document.getElementById("monty").innerHTML = d3.innerHTML
         }
-        else{
-            door_no3.style.display="none";
-            document.getElementById("monty").innerHTML = door_no2.innerHTML
+        else{  
+            d3.style.display="none";
+            document.getElementById("monty").innerHTML = d2.innerHTML
         }
     }
-    else if(winner == 2){
-        door_no3.style.display="none";
-        document.getElementById("monty").innerHTML = door_no2.innerHTML
+    // if the second option is the winner, eliminate the third
+    else if(winner == Number(d2.innerHTML)){
+        d3.style.display="none";
+        document.getElementById("monty").innerHTML = d2.innerHTML
     }
+    // if the third option is the winner, eliminate the second
     else{
-        door_no2.style.display="none";
-        document.getElementById("monty").innerHTML = door_no3.innerHTML
+        d2.style.display="none";
+        document.getElementById("monty").innerHTML = d3.innerHTML
     }
     sw_btn.style.display = "flex";
     sty_btn.style.display = "flex";
 
-    door_no1.removeEventListener("click", eliminate_d1);
-    door_no2.removeEventListener("click", eliminate_d2);
-    door_no3.removeEventListener("click", eliminate_d3);
-}
+    door.removeEventListener("click", eliminate_d1);
+    d2.removeEventListener("click", eliminate_d2);
+    d3.removeEventListener("click", eliminate_d3);
+};
 
-function eliminate_d2(){
-    door_no2.style.background = '#fffbce';
-    i1.style.display = "none";
-    i2.style.display = "flex";
-    i3.style.display = "flex";
-    document.getElementById("choice").innerHTML = door_no2.innerHTML
-    // flip a coin to select a door to eliminate then return that
-    if (winner == 2){
-        if(Math.floor(Math.random()*10)%2==0){
-            door_no1.style.display="none";
-            document.getElementById("monty").innerHTML = door_no3.innerHTML
-        }
-        else{
-            door_no3.style.display="none";
-            document.getElementById("monty").innerHTML = door_no1.innerHTML
-        }
-    }
-    else if(winner == 1){
-        door_no3.style.display="none";
-        document.getElementById("monty").innerHTML = door_no1.innerHTML
-    }
-    else{
-        door_no1.style.display="none";
-        document.getElementById("monty").innerHTML = door_no3.innerHTML
-    }
+// Set choice in HTML, eliminate one of Monty's doors 
+//   and set Monty's remaining door in HTML
+function eliminate_d1(){ eliminate(door_no1, door_no2, door_no3);}
 
-    sw_btn.style.display = "flex";
-    sty_btn.style.display = "flex";
+function eliminate_d2(){ eliminate(door_no2, door_no1, door_no3);}
 
-
-    door_no1.removeEventListener("click", eliminate_d1);
-    door_no2.removeEventListener("click", eliminate_d2);
-    door_no3.removeEventListener("click", eliminate_d3);
-}
-
-function eliminate_d3(){
-    door_no3.style.background = '#fffbce';
-    i1.style.display = "none";
-    i2.style.display = "flex";
-    i3.style.display = "flex";
-    document.getElementById("choice").innerHTML = door_no3.innerHTML
-    // flip a coin to select a door to eliminate then return that
-    if (winner == 3){
-        if(Math.floor(Math.random()*10)%2==0){
-            door_no2.style.display="none";
-            document.getElementById("monty").innerHTML = door_no1.innerHTML
-        }
-        else{
-            door_no1.style.display="none";
-            document.getElementById("monty").innerHTML = door_no2.innerHTML
-        }
-    }
-    else if(winner == 2){
-        door_no1.style.display="none";
-        document.getElementById("monty").innerHTML = door_no2.innerHTML
-    }
-    else{
-        door_no2.style.display="none";
-        document.getElementById("monty").innerHTML = door_no1.innerHTML
-    }
-
-    sw_btn.style.display = "flex";
-    sty_btn.style.display = "flex";
-
-
-    door_no1.removeEventListener("click", eliminate_d1);
-    door_no2.removeEventListener("click", eliminate_d2);
-    door_no3.removeEventListener("click", eliminate_d3);
-}
+function eliminate_d3(){ eliminate(door_no3, door_no2, door_no1);}
 
 
 function elim_door(d1, d2){

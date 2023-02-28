@@ -147,7 +147,8 @@ button{
 }
 
 .heading_A{
-    display: none;
+    display: none;/*flex;
+    color:black;*/
 }
 
 h3{
@@ -155,11 +156,13 @@ h3{
 }
 
 #choice{
-    display: none;
+    display: none;/*flex;
+    color:black;*/
 }
 
 #monty{
-    display: none;
+    display: none;/*flex;
+    color:black;*/
 }
 
 .restart{
@@ -212,5 +215,19 @@ h3{
 
     .cont, .door_container{
         width: 100vw;
+    }
+}
+
+@media screen and (max-width: 380px){
+    .door_container{
+        align-items: space-between;
+    }
+
+    .cont, .door_container{
+        width: 100vw;
+    }
+
+    .instructions{
+        font-size: 20px;
     }
 }
