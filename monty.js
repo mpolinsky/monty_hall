@@ -66,25 +66,25 @@ function switch_door(){
     sw_btn.style.display = "none";
     sty_btn.innerHTML = "Reveal!";
 
-    if(mont == 1){
+    if(Number(document.getElementById("monty").innerHTML) == 1){
         door_no1.style.background = '#497aff';
-        if(choice == 2){
+        if(Number(document.getElementById("choice").innerHTML) == 2){
             door_no2.style.background = '#fffbce';}
         else{
             door_no3.style.background = '#fffbce';
         }
     }
-    else if(mont == 2){
+    else if(Number(document.getElementById("monty").innerHTML) == 2){
         door_no2.style.background = '#497aff';
-        if(choice== 1){
+        if(Number(document.getElementById("choice").innerHTML)== 1){
             door_no1.style.background = '#fffbce';}
         else{
             door_no3.style.background = '#fffbce';
         }
     }
-    else if(mont == 3){
+    else if(Number(document.getElementById("monty").innerHTML) == 3){
         door_no3.style.background = '#497aff';
-        if(choice== 2){
+        if(Number(document.getElementById("choice").innerHTML)== 2){
             door_no2.style.background = '#fffbce';}
         else{
             door_no1.style.background = '#fffbce';
@@ -123,9 +123,9 @@ function eliminate(door, d2, d3){
     sw_btn.style.display = "flex";
     sty_btn.style.display = "flex";
 
-    door.removeEventListener("click", eliminate_d1);
-    d2.removeEventListener("click", eliminate_d2);
-    d3.removeEventListener("click", eliminate_d3);
+    door_no1.removeEventListener("click", eliminate_d1);
+    door_no2.removeEventListener("click", eliminate_d2);
+    door_no3.removeEventListener("click", eliminate_d3);
 };
 
 // Set choice in HTML, eliminate one of Monty's doors 
