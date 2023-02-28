@@ -1,4 +1,4 @@
-// Setup: elements and winner
+// Setup: elements and winner selection
 const buttonA = document.querySelector('#button_A');
 const headingA = document.querySelector('#heading_A');
 const door_no1 = document.querySelector('#no_1');
@@ -7,11 +7,12 @@ const door_no3 = document.querySelector('#no_3');
 const sw_btn = document.querySelector('#sw');
 const sty_btn = document.querySelector("#fin");
 const restart_btn = document.querySelector("#rst");
-var winner = (Math.floor(Math.random()*10)%3)+1;
 const welcome = document.querySelector('.welcome');
 const i1 = document.querySelector('#inst1');
 const i2 = document.querySelector('#inst2');
 const i3 = document.querySelector('#inst3');
+var winner = (Math.floor(Math.random()*10)%3)+1;
+
 
 headingA.innerHTML = winner;
 
