@@ -16,7 +16,7 @@ var winner = (Math.floor(Math.random()*10)%3)+1;
 
 headingA.innerHTML = winner;
 
-
+// Event listener for start button
 buttonA.addEventListener("click", function(){
     document.querySelector(".door_container").style.display = "flex";
     buttonA.style.display = "none";
@@ -24,19 +24,24 @@ buttonA.addEventListener("click", function(){
     i1.style.display= "flex";
 }, {once:true});
 
+// Listen for door selection
 door_no1.addEventListener("click", eliminate_d1);
 door_no2.addEventListener("click", eliminate_d2);
 door_no3.addEventListener("click", eliminate_d3);
 
+// Listen for switch and stay buttons
 sw_btn.addEventListener("click", switch_door, {once:true});
 sty_btn.addEventListener("click", reveal);
 
+// Listen for restart button.
 restart_btn.addEventListener("click", restart);
 
+// Reload page
 function restart(){
     window.location.reload();
 }
 
+// Determine if user won or lost and display result
 function reveal(){
     i2.style.display = "none";
     i3.style.display = "none";
@@ -56,6 +61,7 @@ function reveal(){
     document.getElementById('rst').style.display = "flex";
 }
 
+// Swap door choices and change CSS accordingly
 function switch_door(){
     // Switch your choice
     let temp = Number(document.getElementById("choice").innerHTML);
@@ -93,6 +99,7 @@ function switch_door(){
     }
 }
 
+// Choose a door to eliminate given the user choice and the winning door.
 function eliminate(door, d2, d3){
     door.style.background = '#fffbce';
     // Store choice in HTML
