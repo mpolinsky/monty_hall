@@ -10,6 +10,14 @@
         <div class="cont">
             <p id="choice"></p>
             <p id="monty"></p>
+            <p class="instructions_1" id="inst1">
+                Click a door and hope the best<br>
+                One's a prize, and none the rest!
+            </p>
+            <p class="instructions_2" id="inst2">
+                The host removes their losing door, leaving only one...
+            </p>
+           
             <div class="door_container" id="doors">
                 <div class="door" id="no_1" value="1">
                     1
@@ -22,7 +30,9 @@
                     3
                 </div>
             </div>
-
+            <p class="instructions_3" id="inst3">
+                Stay with your choice?  Or switch with the host?
+            </p>
             <div class="results" id="results">
                
             </div>
@@ -31,6 +41,7 @@
             <button class="switch" id="sw">Switch</button>
             <button class="finish" id="fin">Stay</button>
             </div>
+            <p class="welcome" id="welc">Welcome to a classic game and probability conundrum!</p>
         <button id="button_A">Let's Begin</button>
         <h3 id="heading_A"></h3>
         <button class="restart" id="rst">restart</button>
@@ -40,7 +51,6 @@
 
 
     <script>
-
         const buttonA = document.querySelector('#button_A');
         const headingA = document.querySelector('#heading_A');
         const door_no1 = document.querySelector('#no_1');
@@ -48,14 +58,22 @@
         const door_no3 = document.querySelector('#no_3');
         const sw_btn = document.querySelector('#sw');
         const sty_btn = document.querySelector("#fin");
-        const restart_btn = document.querySelector("#rst")
+        const restart_btn = document.querySelector("#rst");
         var winner = (Math.floor(Math.random()*10)%3)+1;
-        
+        const welcome = document.querySelector('.welcome');
+        const i1 = document.querySelector('#inst1');
+        const i2 = document.querySelector('#inst2');
+        const i3 = document.querySelector('#inst3');
 
         headingA.innerHTML = winner;
+
+
         buttonA.addEventListener("click", function(){
         document.querySelector(".door_container").style.display = "flex";
         buttonA.style.display = "none";
+        welcome.style.display = "none";
+        i1.style.display= "flex";
+
         }, {once:true});
         
         door_no1.addEventListener("click", eliminate_d1);
@@ -72,6 +90,8 @@
         }
 
         function reveal(winner){
+            i2.style.display = "none";
+            i3.style.display = "none";
             let res = document.getElementById("results");
             res.style.display = "flex";
             let doors = document.getElementById('doors');
@@ -83,7 +103,7 @@
                 res.innerHTML = "WINNER!!!";
             }
             else{
-                res.innerHTML = "LOSER!";
+                res.innerHTML = "Bad Luck, You Lose!";
             }
             document.getElementById('rst').style.display = "flex";
         }
@@ -99,6 +119,9 @@
 
         function eliminate_d1(){
             document.getElementById("choice").innerHTML = door_no1.innerHTML
+            i1.style.display = "none";
+            i2.style.display = "flex";
+            i3.style.display = "flex";
             // flip a coin to select a door to eliminate then return that
             if (winner == 1){
                 if(Math.floor(Math.random()*10)%2==0){
@@ -127,6 +150,9 @@
         }
 
         function eliminate_d2(){
+            i1.style.display = "none";
+            i2.style.display = "flex";
+            i3.style.display = "flex";
             document.getElementById("choice").innerHTML = door_no2.innerHTML
             // flip a coin to select a door to eliminate then return that
             if (winner == 2){
@@ -158,6 +184,9 @@
         }
 
         function eliminate_d3(){
+            i1.style.display = "none";
+            i2.style.display = "flex";
+            i3.style.display = "flex";
             document.getElementById("choice").innerHTML = door_no3.innerHTML
             // flip a coin to select a door to eliminate then return that
             if (winner == 3){

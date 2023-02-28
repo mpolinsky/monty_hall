@@ -73,6 +73,7 @@ h3{
     color:rgba(205, 186, 63, 0.977);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bold;
+    border-radius: 6px;
 }
 
 #no1{
@@ -136,7 +137,7 @@ button{
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    color:rgb(244, 162, 239);
+    color:rgb(0, 0, 0);
     width: 75%;
     height: 400px;
     font-size: 48px;
@@ -168,4 +169,27 @@ h3{
 
 .restart:hover{
     background-color:rgb(26, 18, 86);
+}
+
+.welcome{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 38px;
+}
+
+.instructions_1{
+    display: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 34px;
+}
+
+.instructions_2{
+    display: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 30px;
+}
+
+.instructions_3{
+    display: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 30px;
 }
