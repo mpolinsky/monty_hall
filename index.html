@@ -109,15 +109,44 @@
         }
 
         function switch_door(){
+
             // Switch your choice
             let temp = document.getElementById("choice").innerHTML;
+         
             document.getElementById("choice").innerHTML = document.getElementById("monty").innerHTML;
             document.getElementById("monty").innerHTML = temp;
             document.getElementById("fin").innerHTML = "Reveal!";
             document.getElementById("sw").style.display = "none";
-        }
+
+            if(Number(document.getElementById("monty").innerHTML) == 1){
+                document.getElementById("no_1").style.background = '#497aff';
+                if(Number(document.getElementById("choice").innerHTML) == 2){
+                    document.getElementById("no_2").style.background = '#fffbce';}
+                else{
+                    document.getElementById("no_3").style.background = '#fffbce';
+                }
+            }
+            else if(Number(document.getElementById("monty").innerHTML) == 2){
+                document.getElementById("no_2").style.background = '#497aff';
+                if(Number(document.getElementById("choice").innerHTML) == 1){
+                    document.getElementById("no_1").style.background = '#fffbce';}
+                else{
+                    document.getElementById("no_3").style.background = '#fffbce';
+                }
+            }
+            else if(Number(document.getElementById("monty").innerHTML) == 3){
+                document.getElementById("no_3").style.background = '#497aff';
+                if(Number(document.getElementById("choice").innerHTML) == 2){
+                    document.getElementById("no_2").style.background = '#fffbce';}
+                else{
+                    document.getElementById("no_1").style.background = '#fffbce';
+                }
+            }
+            }
+
 
         function eliminate_d1(){
+            door_no1.style.background = '#fffbce';
             document.getElementById("choice").innerHTML = door_no1.innerHTML
             i1.style.display = "none";
             i2.style.display = "flex";
@@ -150,6 +179,7 @@
         }
 
         function eliminate_d2(){
+            door_no2.style.background = '#fffbce';
             i1.style.display = "none";
             i2.style.display = "flex";
             i3.style.display = "flex";
@@ -184,6 +214,7 @@
         }
 
         function eliminate_d3(){
+            door_no3.style.background = '#fffbce';
             i1.style.display = "none";
             i2.style.display = "flex";
             i3.style.display = "flex";
